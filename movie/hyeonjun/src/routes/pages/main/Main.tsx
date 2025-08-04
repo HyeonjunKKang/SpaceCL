@@ -7,7 +7,7 @@ const Main = () => {
       <header className="fixed top-0 left-0 right-0 z-50">
         <Header />
       </header>
-      <div className="mt-[70px]">
+      <div className="mt-[70px] px-3">
         <Outlet />
       </div>
       <footer>

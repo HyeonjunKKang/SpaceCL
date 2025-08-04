@@ -12,16 +12,19 @@ export interface MovieCardProps {
 
 const MovieCard = ({ show, movie }: MovieCardProps) => {
   return (
-    <div className="flex flex-col">
-      {/* 사진영역 */}
-      <img
-        className="rounded-[3px] aspect-[2/3] hover:scale-110 transition-transform duration-150"
-        src={toUrlPath(movie.poster_path)}
-        alt=""
-      />
-      {/* title area */}
-      <p className="text-[14px]">{movie.title}</p>
-      <p className="text-end text-[13px]">{movie.vote_average}</p>
+    <div className="">
+      {show?.rank && <div className="text-[30px]">{show?.ranking}</div>}
+      <div>
+        {/* 사진영역 */}
+        <img
+          className="rounded-[3px] aspect-[2/3] hover:scale-110 transition-transform duration-150"
+          src={toUrlPath(movie.poster_path)}
+          alt=""
+        />
+        {/* title area */}
+        <p className="text-[14px] [overflow-wrap:anywhere]">{movie.title}</p>
+        <p className="text-end text-[13px]">{movie.vote_average}</p>
+      </div>
     </div>
   );
 };
