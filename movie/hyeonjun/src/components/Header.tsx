@@ -88,7 +88,6 @@ const Header = () => {
         </div>
       </div>
       <div className="flex items-center gap-3">
-        <button className="text-white">asdfafda</button>
         <div className="flex gap-3">
           <FaMoon style={{ color: 'white' }}></FaMoon>
           <CiSearch onClick={onClickSearch} style={{ color: 'white' }}></CiSearch>
