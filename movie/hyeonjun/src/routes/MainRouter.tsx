@@ -1,32 +1,27 @@
 // MainRouter.tsx
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Main from './pages/main/Main';
-import MovieDetail from './pages/movie/detail/MovieDetail';
+import MovieDetailPage from './pages/movie/detail/MovieDetailPage';
 import { useEffect } from 'react';
-import { useMovieStore } from '../store/useMovieStore';
-
-import movieJson from '../data/movieListData.json';
-import type { MovieResponse } from '../types/movie';
 import Home from './pages/home/Home';
+import SignUp from './pages/login/SignUp';
+import Login from './pages/login/Login';
 
 const NotFound = () => <div>Not Found</div>;
 
 const MainRouter = () => {
-  const { setMovieResponse } = useMovieStore();
-
-  useEffect(() => {
-    const data = movieJson as MovieResponse;
-    setMovieResponse(data);
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Main />}>
           <Route index element={<Home />} />
-          <Route path="detail/:id" element={<MovieDetail></MovieDetail>} />
+          <Route path="detail/:id" element={<MovieDetailPage></MovieDetailPage>} />
           {/* <Route path="movies" element={<MainMovieGrid />} /> */}
         </Route>
+        <Route path="/signup" element={<SignUp />}></Route>
+        <Route path="/login" element={<Login />}></Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

@@ -1,17 +1,24 @@
 import { useEffect, useState } from 'react';
-import type { Movie } from '../../../../types/movie';
+import type { MovieDetail } from '../../../../types/movie';
 import { toUrlPath } from '../../../../types/movie';
 import { useParams } from 'react-router-dom';
-import { useMovieStore } from '../../../../store/useMovieStore';
+import { getDetailMovie } from '../../../../api/movie/movieApi';
 
-const MovieDetail = () => {
+const MovieDetailPage = () => {
   const { id } = useParams<{ id: string }>();
-  const [movie, setMovie] = useState<Movie | null>(null);
-  const { getMovieById } = useMovieStore();
+  const [movie, setMovie] = useState<MovieDetail | null>(null);
+
+  const fetchMovieData = async () => {
+    try {
+      const result = await getDetailMovie(id);
+      setMovie(result ?? null);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
-    const movieData = getMovieById(Number(id));
-    setMovie(movieData ?? null);
+    fetchMovieData();
   }, []);
 
   return (
@@ -26,8 +33,8 @@ const MovieDetail = () => {
             <p>{movie?.vote_average}</p>
           </div>
           <div className="flex gap-2">
-            {movie?.genre_ids.map(id => (
-              <p>{id}</p>
+            {movie?.genres.map(data => (
+              <p>{data.name}</p>
             ))}
           </div>
           <div>{movie?.overview}</div>
@@ -37,4 +44,4 @@ const MovieDetail = () => {
   );
 };
 
-export default MovieDetail;
+export default MovieDetailPage;
