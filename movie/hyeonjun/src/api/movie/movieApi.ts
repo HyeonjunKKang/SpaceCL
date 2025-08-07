@@ -35,3 +35,20 @@ export const getDetailMovie = async (movieId?: string): Promise<MovieDetail> => 
 
   return await client.request(endpoint);
 };
+
+export const getSearchMovie = async (keyword: string, page: number = 1): Promise<MovieResponse> => {
+  const endPoint: ApiEndpoint = {
+    method: HttpMethod.get,
+    url: `search/movie`,
+    headers: {
+      Authorization: `Bearer ${import.meta.env.VITE_TMDB_API_KEY}`,
+    },
+    params: {
+      query: keyword,
+      language: 'ko-KR',
+      page: page,
+    },
+  };
+
+  return await client.request(endPoint);
+};

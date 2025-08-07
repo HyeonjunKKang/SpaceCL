@@ -19,7 +19,7 @@ const MovieDetailPage = () => {
 
   useEffect(() => {
     fetchMovieData();
-  }, []);
+  }, [id]);
 
   return (
     <div className="flex gap-3">
