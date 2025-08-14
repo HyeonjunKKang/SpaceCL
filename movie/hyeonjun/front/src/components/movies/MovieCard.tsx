@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { toUrlPath, type Movie } from '../../types/movie';
 
 export interface MovieCardProps {
