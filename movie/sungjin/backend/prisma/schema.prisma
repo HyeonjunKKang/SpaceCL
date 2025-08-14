@@ -1,0 +1,35 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  nickname  String?
+  createdAt DateTime @default(now())
+  bookmarks  Bookmark[]
+}
+model Bookmark{
+  id Int @id@default(autoincrement())
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId     Int
+
+  provider   String   // 예: "tmdb"
+  mediaType  String   // 예: "movie", "tv"
+  externalId String   // TMDB id 같은 외부 id (문자열/숫자 상관 X)
+  title      String?
+  posterUrl  String?  // TMDB 이미지 풀 URL 저장 추천
+  createdAt  DateTime @default(now())
+
+  @@unique([userId, provider, mediaType, externalId])
+
+}

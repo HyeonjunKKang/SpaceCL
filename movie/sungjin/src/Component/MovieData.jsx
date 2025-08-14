@@ -1,27 +1,13 @@
-import styled from "styled-components";
-import MovieCard from "./MovieCard";
-import { useParams } from "react-router-dom";
+import React, { useEffect, useState } from 'react'
+import { fetchModule } from 'vite'
 
-import React, { useState, useEffect } from "react";
-const api = import.meta.env.VITE_MOVIE_API_KEY;
-const LoginBox = styled.div
 
- 
-
-const Gride = styled.div`
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 30px;
-  padding: 10px;
-
-  margin: auto;
-`;
-const  Main= () => {
+const MovieData = () => {
     const [movieData,setMovieData] = useState(null) 
     useEffect(()=>{
         const fetchMovie=async ()=>{
         try{
-            const res =await fetch('https://api.themoviedb.org/3/movie/popular?language=ko-KR&page=1',
+            const res =await fetch('https://api.themoviedb.org/3/movie/popular',
           {
             method: 'GET',
             headers:{
@@ -32,7 +18,6 @@ const  Main= () => {
              }      
             )
             const data= await res.json()
-            
           setMovieData(data);}
           catch(err) {
             console.log('api호출x')
@@ -41,15 +26,15 @@ const  Main= () => {
         fetchMovie();
     },[]);
 
+        
+    
+   
 
 
   return (
-    <Gride>
-      {movieData?.results.map((movie) => (
-        <MovieCard key={movie.id} movie={movie} />
-      ))}
-    </Gride>
-  );
-};
-
-export default Main;
+    <div>
+      d
+    </div>
+  )
+}
+export default MovieData

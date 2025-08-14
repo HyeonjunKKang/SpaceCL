@@ -16,7 +16,7 @@ const Box = styled.div`
 `;
 const Minibox = styled.img`
   width: 100%;
-  aspect-ratio: 2 / 3;
+  aspect-ratio: 2/3;
 `;
 const Title = styled.h2`
   background-color: #eee;
@@ -25,10 +25,10 @@ const Title = styled.h2`
 const Average = styled.p`
   font-size: 1rem;
   color: #555;
-  background-color: #eee;
 `;
-const MovieCard = ({ movie  }) => {
-  const posterUrl = `https://image.tmdb.org/t/p/original${movie.poster_path}`;
+
+const MovieCard = ({ movie }) => {
+  const posterUrl = `https://image.tmdb.org/t/p/original${movie.backdrop_path}`;
   return (
     <StyledLink to={`/details/${movie.id}`}>
       <Box>
