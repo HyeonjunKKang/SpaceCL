@@ -17,6 +17,7 @@ const Gride = styled.div`
   margin: auto;
 `;
 const  Main= () => {
+  
     const [movieData,setMovieData] = useState(null) 
     useEffect(()=>{
         const fetchMovie=async ()=>{
