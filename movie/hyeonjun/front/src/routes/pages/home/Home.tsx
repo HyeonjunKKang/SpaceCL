@@ -1,4 +1,4 @@
-import React from 'react';
+
 import MainMovieGrid from './MainMovieGrid';
 import { useMovieStore } from '../../../store/useMovieStore';
 import SliderSwiper from '../../../components/SlideSwiper';
