@@ -1,9 +1,9 @@
-import { ApiClient, HttpMethod, type ApiEndpoint } from '../../utils/axios';
+import { ApiClient, HttpMethod, type ApiEndpoint } from '../../utils/network/axios';
 import { type MovieDetail, type MovieResponse } from '../../types/movie';
 
-const basedUrl = 'https://api.themoviedb.org/3';
-
-const client = new ApiClient(basedUrl);
+const client = new ApiClient({
+  baseURL: 'https://api.themoviedb.org/3',
+});
 
 export const getPopularMovies = async (page: number): Promise<MovieResponse> => {
   const endpoint: ApiEndpoint = {
