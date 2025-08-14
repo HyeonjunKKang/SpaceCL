@@ -50,4 +50,6 @@ psd
 thumb
 sketch
 
+*.pem
+
 # End of https://www.toptal.com/developers/gitignore/api/react,macos

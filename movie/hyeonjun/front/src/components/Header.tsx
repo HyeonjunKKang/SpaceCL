@@ -6,9 +6,13 @@ import { useEffect, useState } from 'react';
 import { getSearchMovie } from '../api/movie/movieApi';
 import { useDebounce } from '../hook/useDebounce';
 import type { MovieResponse } from '../types/movie';
+import { IoMdPerson } from 'react-icons/io';
+import { useAuth } from '../context/auth.context';
 
 const Header = () => {
   const navigate = useNavigate();
+  const { isAuthed, logout } = useAuth();
+  const [profileOpen, setProfileOpen] = useState(false);
 
   // search props
 
@@ -92,20 +96,40 @@ const Header = () => {
           <FaMoon style={{ color: 'white' }}></FaMoon>
           <CiSearch onClick={onClickSearch} style={{ color: 'white' }}></CiSearch>
         </div>
-        <div className="flex gap-1 items-center">
-          <Link
-            to="/login"
-            className="bg-purple-400 px-2 py-1 text-white text-[15px] rounded-[3px]"
+        {isAuthed ? (
+          <div
+            className="relative inline-block"
+            onMouseEnter={() => setProfileOpen(true)}
+            onMouseLeave={() => setProfileOpen(false)}
           >
-            로그인
-          </Link>
-          <Link
-            to={'/signup'}
-            className="bg-purple-400 px-2 py-1 text-white text-[15px] rounded-[3px]"
-          >
-            <p>회원가입</p>
-          </Link>
-        </div>
+            <IoMdPerson className="bg-white size-[30px] rounded-full hover:cursor-pointer" />
+            {profileOpen && (
+              <div className="flex flex-col gap-3 bg-red-400 absolute right-1 top-full text-black p-3 rounded-[8px] whitespace-nowrap">
+                <div onClick={() => navigate('/bookmarks')} className="text-white cursor-pointer">
+                  관심목록
+                </div>
+                <div onClick={logout} className="text-white cursor-pointer">
+                  로그아웃
+                </div>
+              </div>
+            )}
+          </div>
+        ) : (
+          <div className="flex gap-1 items-center">
+            <Link
+              to="/login"
+              className="bg-purple-400 px-2 py-1 text-white text-[15px] rounded-[3px]"
+            >
+              로그인
+            </Link>
+            <Link
+              to={'/signup'}
+              className="bg-purple-400 px-2 py-1 text-white text-[15px] rounded-[3px]"
+            >
+              <p>회원가입</p>
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   );
