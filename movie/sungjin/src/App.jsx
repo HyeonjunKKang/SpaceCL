@@ -10,7 +10,7 @@ import AppLayout from "./Component/AppLayout";
 import { AuthProvider } from "./auth/AuthContext";
 
 import BookMark from "./Component/BookMark";
-import MyPage from "./Component/mypage";
+import MyPage from "./Component/MyPage.jsx";
 
 function App() {
   return (
