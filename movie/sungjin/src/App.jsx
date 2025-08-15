@@ -1,8 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
-import Main from "./Component/Main";
+import Main from "./Component/Main.jsx";
 import MovieDetails from "./Component/MovieDetails";
-
 import Login from "./Component/Login";
 import NaBar from "./Component/NaBar";
 import MovieSearch from "./Component/MovieSearch";
