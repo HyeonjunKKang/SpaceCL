@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import MovieCard from "./MovieCard";
-import { useParams } from "react-router-dom";
+
 
 import React, { useState, useEffect } from "react";
 const api = import.meta.env.VITE_MOVIE_API_KEY;
@@ -17,6 +17,7 @@ const Gride = styled.div`
   margin: auto;
 `;
 const  Main= () => {
+
     const [movieData,setMovieData] = useState(null) 
     useEffect(()=>{
         const fetchMovie=async ()=>{
