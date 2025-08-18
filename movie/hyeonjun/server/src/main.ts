@@ -27,8 +27,24 @@ async function bootstrap() {
   );
 
   app.enableCors({
-    origin: 'http://localhost:5173', // React 개발 서버 주소
-    credentials: true, // 쿠키/인증 헤더 허용 여부
+    // 1) 동적 화이트리스트: Vercel, 로컬, ngrok/trycloudflare 허용
+    origin: (origin, callback) => {
+      const whitelist = ['https://space-cl-ratx.vercel.app', 'http://localhost:5173'];
+      // 개발 도구/서버 간 호출 등 origin이 없는 경우 허용
+      if (!origin) return callback(null, true);
+
+      const ok =
+        whitelist.includes(origin) ||
+        /\.ngrok-free\.app$/.test(origin) ||
+        /\.trycloudflare\.com$/.test(origin);
+
+      return ok ? callback(null, true) : callback(new Error('CORS blocked'));
+    },
+
+    // 2) 자주 쓰는 메서드/헤더 허용
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true, // 쿠키/인증 포함 시 필수
   });
 
   await app.listen(process.env.PORT ?? 3000);
